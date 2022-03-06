@@ -1,9 +1,17 @@
+const quoteContainer = document.getElementById("quote-container");
+const quoteText = document.getElementById("quote");
+const authorText = document.getElementById("author");
+const twitterBtn = document.getElementById("twitter");
+const newQuoteBtn = document.getElementById("new-quote");
+
+
 let apiQuotes = [];
 
 function newQuote() {
   let randomQuote = Math.floor(Math.random() * apiQuotes.length);
   const quote = apiQuotes[randomQuote];
-  console.log(quote);
+  quoteText.textContent = quote.text
+  authorText.textContent = quote.author
 }
 
 async function getQuotes() {
