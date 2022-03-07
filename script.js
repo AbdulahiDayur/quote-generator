@@ -3,11 +3,23 @@ const quoteText = document.getElementById("quote");
 const authorText = document.getElementById("author");
 const twitterBtn = document.getElementById("twitter");
 const newQuoteBtn = document.getElementById("new-quote");
+const loader = document.getElementById("loader")
 
 
 let apiQuotes = [];
 
+function loading() {
+  loader.hidden = false;
+  quoteContainer.hidden = true;
+}
+
+function complete() {
+  loader.hidden = true;
+  quoteContainer.hidden = false;
+}
+
 function newQuote() {
+  loading()
   let randomQuote = Math.floor(Math.random() * apiQuotes.length);
   const quote = apiQuotes[randomQuote];
 
@@ -18,16 +30,18 @@ function newQuote() {
   }
 
   if (quote.text.length > 50) {
-    console.log(quoteText);
     quoteText.classList.add("long-quote")
   } else {
     quoteText.classList.remove("long-quote")
   }
 
-  quoteText.textContent = quote.text
+  // Set Quote, Hide Loader
+  quoteText.textContent = quote.text;
+  complete()
 }
 
 async function getQuotes() {
+  loading()
   const apiUrl = "https://type.fit/api/quotes";
 
   try {
@@ -36,7 +50,7 @@ async function getQuotes() {
     newQuote()
     
   } catch (error) {
-    
+    console.log(error);
   }
 }
 
