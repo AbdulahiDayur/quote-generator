@@ -18,7 +18,7 @@ function newQuote() {
   }
 
   if (quote.text.length > 50) {
-    console.log("LONG TEXT DUDE!!!!!!");
+    console.log(quoteText);
     quoteText.classList.add("long-quote")
   } else {
     quoteText.classList.remove("long-quote")
@@ -39,5 +39,17 @@ async function getQuotes() {
     
   }
 }
+
+//Tweet Quote
+function tweetQuote() {
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+
+  window.open(twitterUrl, "_blank");
+}
+
+//Event Listners
+newQuoteBtn.addEventListener("click", newQuote)
+twitterBtn.addEventListener("click", tweetQuote)
+
 
 getQuotes()
