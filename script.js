@@ -10,8 +10,21 @@ let apiQuotes = [];
 function newQuote() {
   let randomQuote = Math.floor(Math.random() * apiQuotes.length);
   const quote = apiQuotes[randomQuote];
+
+  if (!quote.author) {
+    authorText.textContent = "Unknown"
+  } else {
+    authorText.textContent = quote.author
+  }
+
+  if (quote.text.length > 50) {
+    console.log("LONG TEXT DUDE!!!!!!");
+    quoteText.classList.add("long-quote")
+  } else {
+    quoteText.classList.remove("long-quote")
+  }
+
   quoteText.textContent = quote.text
-  authorText.textContent = quote.author
 }
 
 async function getQuotes() {
